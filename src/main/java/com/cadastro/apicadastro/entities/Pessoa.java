@@ -1,5 +1,7 @@
 package com.cadastro.apicadastro.entities;
 
+import com.cadastro.apicadastro.requests.PessoaRegistroRequest;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,8 +37,10 @@ public class Pessoa {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id")
+    @JsonIgnore
     private Endereco endereco;
 
     @OneToMany(mappedBy = "pessoa")
+    @JsonIgnore
     private List<Contato> contatos;
 }

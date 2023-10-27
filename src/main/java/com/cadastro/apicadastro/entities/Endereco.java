@@ -1,5 +1,6 @@
 package com.cadastro.apicadastro.entities;
 
+import com.cadastro.apicadastro.requests.PessoaRegistroRequest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
