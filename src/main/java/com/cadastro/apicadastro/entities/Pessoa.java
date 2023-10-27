@@ -3,6 +3,7 @@ package com.cadastro.apicadastro.entities;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Pessoa {
 
     @Id
@@ -19,8 +21,6 @@ public class Pessoa {
     private Long id;
 
     private String nome;
-
-    private String email;
 
     private LocalDate idade;
 
@@ -31,4 +31,8 @@ public class Pessoa {
     private String estadoCivil;
 
     private String nacionalidade;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "endereco")
+    private Endereco endereco;
 }
