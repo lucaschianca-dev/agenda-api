@@ -1,4 +1,4 @@
-package com.agenda.apiagenda;
+package com.cadastro.apicadastro;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.agenda.apiagenda;
+package com.cadastro.apicadastro;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
