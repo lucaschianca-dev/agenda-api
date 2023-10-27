@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "pessoas")
@@ -33,6 +34,9 @@ public class Pessoa {
     private String nacionalidade;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "endereco")
+    @JoinColumn(name = "endereco_id")
     private Endereco endereco;
+
+    @OneToMany(mappedBy = "pessoa")
+    private List<Contato> contatos;
 }

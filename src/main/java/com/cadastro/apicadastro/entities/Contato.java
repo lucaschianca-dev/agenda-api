@@ -17,8 +17,13 @@ public class Contato {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String nome;
+
     @Enumerated(EnumType.ORDINAL)
     private TipoContato tipoContato;
 
     private String contato;
+
+    @ManyToOne()
+    private Pessoa pessoa;
 }
