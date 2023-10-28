@@ -35,12 +35,12 @@ public class Pessoa {
 
     private String nacionalidade;
 
+    private boolean ativo = true;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id")
-    @JsonIgnore
     private Endereco endereco;
 
-    @OneToMany(mappedBy = "pessoa")
-    @JsonIgnore
+    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
     private List<Contato> contatos;
 }

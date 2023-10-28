@@ -8,6 +8,8 @@ import com.cadastro.apicadastro.repositories.PessoaRepository;
 import com.cadastro.apicadastro.requests.PessoaRegistroRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,20 +22,32 @@ public class PessoaService {
 
     private PessoaRepository pessoaRepository;
 
-    private static List<Contato> contatos = new ArrayList<>();
-
     @Transactional
     public PessoaDTO registraPessoa(@Valid PessoaRegistroRequest request) {
         Pessoa pessoa = PessoaMapper.INSTANCE.toPessoa(request);
 
-        for(Contato contato: request.getContatos()){
+        for (Contato contato : request.getContatos()) {
             contato.setPessoa(pessoa);
-            contatos.add(contato);
         }
-        pessoa.setContatos(contatos);
 
         Pessoa pessoaSalva = pessoaRepository.save(pessoa);
 
         return PessoaMapper.INSTANCE.toPessoaDTO(pessoaSalva);
     }
+
+    public Page<PessoaDTO> listaPessoas(Pageable pageable) {
+        Page<PessoaDTO> pessoasAtivas = pessoaRepository.findAllByAtivoTrue(pageable).map(PessoaDTO::new);
+        return pessoasAtivas;
+    }
+
+    public PessoaDTO buscaPessoaPorId(Long id) {
+        Pessoa pessoa = pessoaRepository.findById(id).orElse(null);
+        if (pessoa != null) {
+            return PessoaMapper.INSTANCE.toPessoaDTO(pessoa);
+        } else {
+            return null; // LEMBRAR DE LANÇAR EXCEÇÃO
+        }
+    }
+
+
 }
