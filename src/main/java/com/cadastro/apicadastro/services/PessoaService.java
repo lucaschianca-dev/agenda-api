@@ -1,5 +1,6 @@
 package com.cadastro.apicadastro.services;
 
+import com.cadastro.apicadastro.dtos.AtualizaPessoaDTO;
 import com.cadastro.apicadastro.dtos.PessoaDTO;
 import com.cadastro.apicadastro.entities.Contato;
 import com.cadastro.apicadastro.entities.Pessoa;
@@ -13,14 +14,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Service
 @AllArgsConstructor
 public class PessoaService {
 
     private PessoaRepository pessoaRepository;
+
+    private ContatoService contatoService;
 
     @Transactional
     public PessoaDTO registraPessoa(@Valid PessoaRegistroRequest request) {
@@ -49,5 +49,26 @@ public class PessoaService {
         }
     }
 
+    @Transactional
+    public PessoaDTO atualizaPessoa(AtualizaPessoaDTO atualiza) {
+        Pessoa pessoa = pessoaRepository.findById(atualiza.id()).orElseThrow();
+        pessoa.atualizaPessoa(atualiza);
 
+        return PessoaMapper.INSTANCE.toPessoaDTO(pessoa);
+    }
+
+    @Transactional
+    public PessoaDTO adicionaContato(Long pessoaId, Contato contato) {
+        Pessoa pessoa = pessoaRepository.findById(pessoaId).orElse(null);
+
+        if (pessoa != null) {
+            contato.setPessoa(pessoa);
+            contatoService.registraContato(contato);
+            pessoa.getContatos().add(contato);
+            pessoaRepository.save(pessoa);
+            return PessoaMapper.INSTANCE.toPessoaDTO(pessoa);
+        } else {
+            return null;
+        }
+    }
 }

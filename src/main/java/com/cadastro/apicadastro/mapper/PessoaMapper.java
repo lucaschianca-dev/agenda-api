@@ -15,4 +15,6 @@ public interface PessoaMapper {
     Pessoa toPessoa(PessoaRegistroRequest request);
 
     PessoaDTO toPessoaDTO(Pessoa pessoa);
+
+    Pessoa toPessoa(PessoaDTO pessoaDTO);
 }

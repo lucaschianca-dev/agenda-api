@@ -1,5 +1,6 @@
 package com.cadastro.apicadastro.entities;
 
+import com.cadastro.apicadastro.dtos.AtualizaPessoaDTO;
 import com.cadastro.apicadastro.requests.PessoaRegistroRequest;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -43,4 +44,20 @@ public class Pessoa {
 
     @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
     private List<Contato> contatos;
+
+    public void atualizaPessoa(AtualizaPessoaDTO atualiza) {
+        if (atualiza.id() == null){
+        } else {
+            if (atualiza.nome() != null)
+                this.nome = atualiza.nome();
+            if (atualiza.genero() != null)
+                this.genero = atualiza.genero();
+            if (atualiza.estadoCivil() != null)
+                this.estadoCivil = atualiza.estadoCivil();
+            if (atualiza.endereco() != null)
+                this.endereco = atualiza.endereco();
+            if (atualiza.contatos() != null)
+                this.contatos = atualiza.contatos();
+        }
+    }
 }
