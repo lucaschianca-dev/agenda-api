@@ -1,6 +1,5 @@
 package com.cadastro.apicadastro.repositories;
 
-import com.cadastro.apicadastro.dtos.PessoaDTO;
 import com.cadastro.apicadastro.entities.Pessoa;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

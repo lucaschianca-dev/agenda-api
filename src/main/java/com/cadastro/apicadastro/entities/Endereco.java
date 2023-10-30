@@ -1,15 +1,11 @@
 package com.cadastro.apicadastro.entities;
 
 import com.cadastro.apicadastro.dtos.AtualizaPessoaDTO;
-import com.cadastro.apicadastro.requests.PessoaRegistroRequest;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Entity
 @Table(name = "enderecos")

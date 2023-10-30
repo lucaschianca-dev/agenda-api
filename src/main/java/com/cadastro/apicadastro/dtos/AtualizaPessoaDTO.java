@@ -1,9 +1,6 @@
 package com.cadastro.apicadastro.dtos;
 
-import com.cadastro.apicadastro.entities.Contato;
 import com.cadastro.apicadastro.entities.Endereco;
-
-import java.util.List;
 
 public record AtualizaPessoaDTO(
         Long id,
@@ -14,8 +11,7 @@ public record AtualizaPessoaDTO(
 
         String estadoCivil,
 
-        Endereco endereco,
+        Endereco endereco
 
-        List<Contato> contatos
 ) {
 }

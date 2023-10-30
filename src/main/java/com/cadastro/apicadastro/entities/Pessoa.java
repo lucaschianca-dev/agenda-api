@@ -1,8 +1,6 @@
 package com.cadastro.apicadastro.entities;
 
 import com.cadastro.apicadastro.dtos.AtualizaPessoaDTO;
-import com.cadastro.apicadastro.requests.PessoaRegistroRequest;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -56,8 +54,6 @@ public class Pessoa {
                 this.estadoCivil = atualiza.estadoCivil();
             if (atualiza.endereco() != null)
                 this.endereco = atualiza.endereco();
-            if (atualiza.contatos() != null)
-                this.contatos = atualiza.contatos();
         }
     }
 }

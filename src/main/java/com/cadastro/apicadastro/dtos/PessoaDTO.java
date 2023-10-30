@@ -46,6 +46,5 @@ public class PessoaDTO {
         this.endereco = pessoa.getEndereco();
         this.contatos = pessoa.getContatos();
         this.ativo = pessoa.isAtivo();
-
     }
 }
