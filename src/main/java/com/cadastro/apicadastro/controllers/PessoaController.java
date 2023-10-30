@@ -2,6 +2,7 @@ package com.cadastro.apicadastro.controllers;
 
 import com.cadastro.apicadastro.dtos.AtualizaPessoaDTO;
 import com.cadastro.apicadastro.dtos.PessoaDTO;
+import com.cadastro.apicadastro.entities.Contato;
 import com.cadastro.apicadastro.requests.PessoaRegistroRequest;
 import com.cadastro.apicadastro.services.PessoaService;
 import jakarta.validation.Valid;
@@ -46,6 +47,17 @@ public class PessoaController {
             return ResponseEntity.ok(pessoa);
         } else {
             return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @PostMapping("/{pessoaId}/contatos")
+    public ResponseEntity adicionaContato(@PathVariable Long pessoaId, @RequestBody Contato contato) {
+        PessoaDTO pessoaDTO = pessoaService.adicionaContato(pessoaId, contato);
+
+        if (pessoaDTO != null) {
+            return ResponseEntity.ok(pessoaDTO);
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 }
