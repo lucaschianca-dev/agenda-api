@@ -51,7 +51,7 @@ public class Pessoa {
         if (atualiza.estadoCivil() != null)
             this.estadoCivil = atualiza.estadoCivil();
         if (atualiza.endereco() != null)
-            this.endereco = atualiza.endereco();
+            this.endereco.atualizaEndereco(atualiza.endereco());
     }
 
     public void ativaPessoa() {

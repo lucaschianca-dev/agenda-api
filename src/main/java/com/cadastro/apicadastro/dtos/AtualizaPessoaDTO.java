@@ -10,7 +10,7 @@ public record AtualizaPessoaDTO(
 
         String estadoCivil,
 
-        Endereco endereco
+        DataEndereco endereco
 
 ) {
 }

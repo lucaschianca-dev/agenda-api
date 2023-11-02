@@ -1,6 +1,7 @@
 package com.cadastro.apicadastro.entities;
 
 import com.cadastro.apicadastro.dtos.AtualizaPessoaDTO;
+import com.cadastro.apicadastro.dtos.DataEndereco;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,18 +32,12 @@ public class Endereco {
 
     private String numero;
 
-    public void atualizaEndereco(AtualizaPessoaDTO atualiza) {
-        if (atualiza.endereco().uf != null)
-            this.uf = atualiza.endereco().uf;
-        if (atualiza.endereco().cep != null)
-            this.cep = atualiza.endereco().cep;
-        if (atualiza.endereco().cidade != null)
-            this.cidade = atualiza.endereco().cidade;
-        if (atualiza.endereco().bairro != null)
-            this.bairro = atualiza.endereco().bairro;
-        if (atualiza.endereco().rua != null)
-            this.rua = atualiza.endereco().rua;
-        if (atualiza.endereco().numero != null)
-            this.numero = atualiza.endereco().numero;
+    public void atualizaEndereco(DataEndereco atualiza) {
+        if (atualiza.uf() != null) this.uf = atualiza.uf();
+        if (atualiza.cep() != null) this.cep = atualiza.cep();
+        if (atualiza.cidade() != null) this.cidade = atualiza.cidade();
+        if (atualiza.bairro() != null) this.bairro = atualiza.bairro();
+        if (atualiza.rua() != null) this.rua = atualiza.rua();
+        if (atualiza.numero() != null) this.numero = atualiza.numero();
     }
 }
