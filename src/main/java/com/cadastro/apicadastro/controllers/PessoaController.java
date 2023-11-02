@@ -1,11 +1,16 @@
 package com.cadastro.apicadastro.controllers;
 
 import com.cadastro.apicadastro.dtos.AtualizaPessoaDTO;
+import com.cadastro.apicadastro.dtos.ContatoDTO;
 import com.cadastro.apicadastro.dtos.PessoaDTO;
 import com.cadastro.apicadastro.entities.Contato;
+import com.cadastro.apicadastro.entities.Pessoa;
+import com.cadastro.apicadastro.mapper.PessoaMapper;
 import com.cadastro.apicadastro.requests.PessoaRegistroRequest;
+import com.cadastro.apicadastro.services.ContatoService;
 import com.cadastro.apicadastro.services.PessoaService;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -15,13 +20,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/pessoas")
+@AllArgsConstructor
 public class PessoaController {
 
     private PessoaService pessoaService;
 
-    public PessoaController(PessoaService pessoaService) {
-        this.pessoaService = pessoaService;
-    }
+    private ContatoService contatoService;
 
     @PostMapping
     public ResponseEntity registraPessoa(@RequestBody PessoaRegistroRequest request) {
@@ -38,6 +42,11 @@ public class PessoaController {
     public ResponseEntity buscaPessoaPorId(@PathVariable Long id) {
         var pessoa = pessoaService.buscaPessoaPorId(id);
         return ResponseEntity.ok(pessoa);
+    }
+
+    @GetMapping("/{id}/contatos")
+    public ResponseEntity buscaContatosPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(contatoService.buscaContatosPorPessoa(id));
     }
 
     @PutMapping("/{id}")
@@ -60,4 +69,6 @@ public class PessoaController {
             return ResponseEntity.notFound().build();
         }
     }
+
+
 }

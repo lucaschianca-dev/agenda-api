@@ -36,7 +36,7 @@ public class PessoaService {
     }
 
     public Page<PessoaDTO> listaPessoas(Pageable pageable) {
-        Page<PessoaDTO> pessoasAtivas = pessoaRepository.findAllByAtivoTrue(pageable).map(PessoaDTO::new);
+        Page<PessoaDTO> pessoasAtivas = pessoaRepository.findAllByAtivoTrue(pageable).map(PessoaMapper.INSTANCE::toPessoaDTO);
         return pessoasAtivas;
     }
 
