@@ -1,5 +1,7 @@
 package com.cadastro.apicadastro.entities;
 
+import com.cadastro.apicadastro.dtos.AtualizaContatoDTO;
+import com.cadastro.apicadastro.dtos.AtualizaPessoaDTO;
 import com.cadastro.apicadastro.enums.TipoContato;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -33,4 +35,10 @@ public class Contato {
     @JoinColumn(name = "pessoa_id")
     @JsonManagedReference
     private Pessoa pessoa;
+
+    public void atualizaContato(AtualizaContatoDTO atualiza) {
+        if (atualiza.nome() != null) this.nome = atualiza.nome();
+        if (atualiza.tipoContato() != null) this.tipoContato = atualiza.tipoContato();
+        if (atualiza.contato() != null) this.contato = atualiza.contato();
+    }
 }

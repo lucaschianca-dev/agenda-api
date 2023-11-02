@@ -1,5 +1,6 @@
 package com.cadastro.apicadastro.mapper;
 
+import com.cadastro.apicadastro.dtos.AtualizaContatoDTO;
 import com.cadastro.apicadastro.dtos.ContatoDTO;
 import com.cadastro.apicadastro.dtos.ListarContatoPorPessoaDTO;
 import com.cadastro.apicadastro.entities.Contato;
@@ -16,4 +17,6 @@ public interface ContatoMapper {
     ContatoDTO toContatoDTO(Contato contato);
 
     List<ListarContatoPorPessoaDTO> toListContatoDTO(List<ListarContatoPorPessoaDTO> contatos);
+
+    AtualizaContatoDTO toAtualizaContatoDTO(Contato contato);
 }

@@ -1,8 +1,8 @@
 package com.cadastro.apicadastro.services;
 
-import com.cadastro.apicadastro.dtos.ContatoDTO;
-import com.cadastro.apicadastro.dtos.ListarContatoPorPessoaDTO;
+import com.cadastro.apicadastro.dtos.*;
 import com.cadastro.apicadastro.entities.Contato;
+import com.cadastro.apicadastro.entities.Pessoa;
 import com.cadastro.apicadastro.mapper.ContatoMapper;
 import com.cadastro.apicadastro.mapper.PessoaMapper;
 import com.cadastro.apicadastro.repositories.ContatoRepository;
@@ -40,5 +40,13 @@ public class ContatoService {
         } else {
             return null; // LEMBRAR DE LANÇAR EXCEÇÃO
         }
+    }
+
+    @Transactional
+    public AtualizaContatoDTO atualizaContato(Long id, AtualizaContatoDTO atualiza) {
+        Contato contato = contatoRepository.findById(id).orElseThrow();
+        contato.atualizaContato(atualiza);
+
+        return ContatoMapper.INSTANCE.toAtualizaContatoDTO(contato);
     }
 }
