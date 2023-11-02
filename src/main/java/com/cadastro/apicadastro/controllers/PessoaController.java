@@ -34,15 +34,15 @@ public class PessoaController {
         return ResponseEntity.ok(pessoasAtivas);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity buscaPessoaPorId(@PathVariable Long id) {
         var pessoa = pessoaService.buscaPessoaPorId(id);
         return ResponseEntity.ok(pessoa);
     }
 
-    @PutMapping("{id}")
-    public ResponseEntity atualizaPessoa(@RequestBody @Valid AtualizaPessoaDTO atualiza) {
-        PessoaDTO pessoa = pessoaService.atualizaPessoa(atualiza);
+    @PutMapping("/{id}")
+    public ResponseEntity atualizaPessoa(@PathVariable Long id, @RequestBody @Valid AtualizaPessoaDTO atualiza) {
+        PessoaDTO pessoa = pessoaService.atualizaPessoa(id, atualiza);
         if (pessoa != null) {
             return ResponseEntity.ok(pessoa);
         } else {

@@ -50,8 +50,8 @@ public class PessoaService {
     }
 
     @Transactional
-    public PessoaDTO atualizaPessoa(AtualizaPessoaDTO atualiza) {
-        Pessoa pessoa = pessoaRepository.findById(atualiza.id()).orElseThrow();
+    public PessoaDTO atualizaPessoa(Long id, AtualizaPessoaDTO atualiza) {
+        Pessoa pessoa = pessoaRepository.findById(id).orElseThrow();
         pessoa.atualizaPessoa(atualiza);
 
         return PessoaMapper.INSTANCE.toPessoaDTO(pessoa);

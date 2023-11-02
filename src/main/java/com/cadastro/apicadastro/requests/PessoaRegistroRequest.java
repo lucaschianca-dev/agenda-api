@@ -2,6 +2,8 @@ package com.cadastro.apicadastro.requests;
 
 import com.cadastro.apicadastro.entities.Contato;
 import com.cadastro.apicadastro.entities.Endereco;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +18,7 @@ public class PessoaRegistroRequest {
 
     private String nome;
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate idade;
 
     private String cpf;

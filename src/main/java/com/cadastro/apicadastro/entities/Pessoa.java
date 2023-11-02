@@ -44,8 +44,6 @@ public class Pessoa {
     private List<Contato> contatos;
 
     public void atualizaPessoa(AtualizaPessoaDTO atualiza) {
-        if (atualiza.id() == null){
-        } else {
             if (atualiza.nome() != null)
                 this.nome = atualiza.nome();
             if (atualiza.genero() != null)
@@ -54,6 +52,5 @@ public class Pessoa {
                 this.estadoCivil = atualiza.estadoCivil();
             if (atualiza.endereco() != null)
                 this.endereco = atualiza.endereco();
-        }
     }
 }
