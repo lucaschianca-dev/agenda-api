@@ -71,4 +71,25 @@ public class PessoaService {
             return null;
         }
     }
+
+    @Transactional
+    public PessoaDTO ativaPessoa(Long id) {
+        Pessoa pessoa = pessoaRepository.getReferenceById(id);
+        pessoa.ativaPessoa();
+
+        return PessoaMapper.INSTANCE.toPessoaDTO(pessoa);
+    }
+
+    @Transactional
+    public PessoaDTO inativaPessoa(Long id) {
+        Pessoa pessoa = pessoaRepository.getReferenceById(id);
+        pessoa.inativaPessoa();
+
+        return PessoaMapper.INSTANCE.toPessoaDTO(pessoa);
+    }
+
+    @Transactional
+    public void excluiPessoa(Long id) {
+        pessoaRepository.deleteById(id);
+    }
 }

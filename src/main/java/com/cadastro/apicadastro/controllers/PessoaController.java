@@ -70,5 +70,24 @@ public class PessoaController {
         }
     }
 
+    @PutMapping("/ativa/{id}")
+    public ResponseEntity ativaPessoa(@PathVariable Long id) {
+        PessoaDTO pessoaDTO = pessoaService.ativaPessoa(id);
 
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/inativa/{id}")
+    public ResponseEntity inativaPessoa(@PathVariable Long id) {
+        PessoaDTO pessoaDTO = pessoaService.inativaPessoa(id);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity excluiPessoa(@PathVariable Long id) {
+        pessoaService.excluiPessoa(id);
+
+        return ResponseEntity.noContent().build();
+    }
 }

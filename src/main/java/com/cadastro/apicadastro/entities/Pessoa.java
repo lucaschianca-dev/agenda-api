@@ -44,13 +44,21 @@ public class Pessoa {
     private List<Contato> contatos;
 
     public void atualizaPessoa(AtualizaPessoaDTO atualiza) {
-            if (atualiza.nome() != null)
-                this.nome = atualiza.nome();
-            if (atualiza.genero() != null)
-                this.genero = atualiza.genero();
-            if (atualiza.estadoCivil() != null)
-                this.estadoCivil = atualiza.estadoCivil();
-            if (atualiza.endereco() != null)
-                this.endereco = atualiza.endereco();
+        if (atualiza.nome() != null)
+            this.nome = atualiza.nome();
+        if (atualiza.genero() != null)
+            this.genero = atualiza.genero();
+        if (atualiza.estadoCivil() != null)
+            this.estadoCivil = atualiza.estadoCivil();
+        if (atualiza.endereco() != null)
+            this.endereco = atualiza.endereco();
+    }
+
+    public void ativaPessoa() {
+        this.ativo = true;
+    }
+
+    public void inativaPessoa() {
+        this.ativo = false;
     }
 }
