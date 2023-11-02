@@ -66,7 +66,7 @@ public class PessoaService {
             contatoService.registraContato(contato);
             pessoa.getContatos().add(contato);
             pessoaRepository.save(pessoa);
-            return PessoaMapper.INSTANCE.toPessoaDTO(pessoa);
+            return new PessoaDTO(pessoa);
         } else {
             return null;
         }
