@@ -1,9 +1,6 @@
 package com.cadastro.apicadastro.controllers;
 
 import com.cadastro.apicadastro.dtos.AtualizaContatoDTO;
-import com.cadastro.apicadastro.dtos.AtualizaPessoaDTO;
-import com.cadastro.apicadastro.dtos.ListarContatoPorPessoaDTO;
-import com.cadastro.apicadastro.dtos.PessoaDTO;
 import com.cadastro.apicadastro.services.ContatoService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

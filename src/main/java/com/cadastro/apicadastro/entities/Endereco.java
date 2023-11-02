@@ -1,6 +1,5 @@
 package com.cadastro.apicadastro.entities;
 
-import com.cadastro.apicadastro.dtos.AtualizaPessoaDTO;
 import com.cadastro.apicadastro.dtos.DataEndereco;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

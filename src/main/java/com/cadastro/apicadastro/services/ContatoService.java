@@ -1,8 +1,9 @@
 package com.cadastro.apicadastro.services;
 
-import com.cadastro.apicadastro.dtos.*;
+import com.cadastro.apicadastro.dtos.AtualizaContatoDTO;
+import com.cadastro.apicadastro.dtos.ContatoDTO;
+import com.cadastro.apicadastro.dtos.ListarContatoPorPessoaDTO;
 import com.cadastro.apicadastro.entities.Contato;
-import com.cadastro.apicadastro.entities.Pessoa;
 import com.cadastro.apicadastro.mapper.ContatoMapper;
 import com.cadastro.apicadastro.mapper.PessoaMapper;
 import com.cadastro.apicadastro.repositories.ContatoRepository;

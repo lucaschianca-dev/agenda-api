@@ -1,11 +1,8 @@
 package com.cadastro.apicadastro.controllers;
 
 import com.cadastro.apicadastro.dtos.AtualizaPessoaDTO;
-import com.cadastro.apicadastro.dtos.ContatoDTO;
 import com.cadastro.apicadastro.dtos.PessoaDTO;
 import com.cadastro.apicadastro.entities.Contato;
-import com.cadastro.apicadastro.entities.Pessoa;
-import com.cadastro.apicadastro.mapper.PessoaMapper;
 import com.cadastro.apicadastro.requests.PessoaRegistroRequest;
 import com.cadastro.apicadastro.services.ContatoService;
 import com.cadastro.apicadastro.services.PessoaService;

@@ -1,7 +1,6 @@
 package com.cadastro.apicadastro.entities;
 
 import com.cadastro.apicadastro.dtos.AtualizaContatoDTO;
-import com.cadastro.apicadastro.dtos.AtualizaPessoaDTO;
 import com.cadastro.apicadastro.enums.TipoContato;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;

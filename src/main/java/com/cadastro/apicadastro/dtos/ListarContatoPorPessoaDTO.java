@@ -3,8 +3,6 @@ package com.cadastro.apicadastro.dtos;
 import com.cadastro.apicadastro.entities.Contato;
 import com.cadastro.apicadastro.enums.TipoContato;
 
-import java.util.List;
-
 public record ListarContatoPorPessoaDTO(
         Long id,
 
