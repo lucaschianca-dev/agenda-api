@@ -29,7 +29,7 @@ public class Contato {
 
     private String contato;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JsonIgnore
     @JoinColumn(name = "pessoa_id")
     @JsonManagedReference
