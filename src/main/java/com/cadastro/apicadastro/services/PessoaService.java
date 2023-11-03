@@ -1,29 +1,35 @@
 package com.cadastro.apicadastro.services;
 
 import com.cadastro.apicadastro.dtos.AtualizaPessoaDTO;
+import com.cadastro.apicadastro.dtos.MalaDiretaDTO;
 import com.cadastro.apicadastro.dtos.PessoaDTO;
 import com.cadastro.apicadastro.entities.Contato;
 import com.cadastro.apicadastro.entities.Pessoa;
 import com.cadastro.apicadastro.mapper.PessoaMapper;
 import com.cadastro.apicadastro.repositories.PessoaRepository;
 import com.cadastro.apicadastro.requests.PessoaRegistroRequest;
+import com.cadastro.apicadastro.util.extensions.EnderecoExtensions;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
+import jakarta.validation.Validation;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class PessoaService {
 
-    private PessoaRepository pessoaRepository;
+    private final PessoaRepository pessoaRepository;
 
-    private ContatoService contatoService;
+    private final ContatoService contatoService;
 
     @Transactional
-    public PessoaDTO registraPessoa(@Valid PessoaRegistroRequest request) {
+    public PessoaDTO registraPessoa(PessoaRegistroRequest request) {
         Pessoa pessoa = PessoaMapper.INSTANCE.toPessoa(request);
 
         for (Contato contato : request.getContatos()) {
@@ -91,5 +97,25 @@ public class PessoaService {
     @Transactional
     public void excluiPessoa(Long id) {
         pessoaRepository.deleteById(id);
+    }
+
+    public MalaDiretaDTO listaPessoaMalaDireta(Long id) {
+        Optional<Pessoa> pessoaOptional = pessoaRepository.findById(id);
+        if (pessoaOptional.isEmpty()) {
+            throw new EntityNotFoundException();
+        }
+
+        Pessoa pessoa = pessoaOptional.get();
+
+        String malaDireta = EnderecoExtensions.buildMalaDireta(
+                pessoa.getEndereco().getRua(),
+                pessoa.getEndereco().getNumero(),
+                pessoa.getEndereco().getBairro(),
+                pessoa.getEndereco().getCep(),
+                pessoa.getEndereco().getCidade(),
+                pessoa.getEndereco().getUf()
+        );
+
+        return new MalaDiretaDTO(pessoa.getId(), pessoa.getNome(), malaDireta);
     }
 }

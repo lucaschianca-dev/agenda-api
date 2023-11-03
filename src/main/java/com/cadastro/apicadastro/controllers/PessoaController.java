@@ -20,12 +20,12 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class PessoaController {
 
-    private PessoaService pessoaService;
+    private final PessoaService pessoaService;
 
-    private ContatoService contatoService;
+    private final ContatoService contatoService;
 
     @PostMapping
-    public ResponseEntity registraPessoa(@RequestBody PessoaRegistroRequest request) {
+    public ResponseEntity registraPessoa(@RequestBody @Valid PessoaRegistroRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(pessoaService.registraPessoa(request));
     }
 
@@ -86,5 +86,10 @@ public class PessoaController {
         pessoaService.excluiPessoa(id);
 
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/maladireta/{id}")
+    public ResponseEntity listaPessoaMalaDireta(@PathVariable Long id) {
+        return ResponseEntity.ok(pessoaService.listaPessoaMalaDireta(id));
     }
 }
