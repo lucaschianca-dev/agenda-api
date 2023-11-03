@@ -29,4 +29,11 @@ public class ContatoController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity excluiContato(@PathVariable Long id) {
+        contatoService.excluiContato(id);
+
+        return ResponseEntity.noContent().build();
+    }
 }

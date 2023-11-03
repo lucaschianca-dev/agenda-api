@@ -50,4 +50,9 @@ public class ContatoService {
 
         return ContatoMapper.INSTANCE.toAtualizaContatoDTO(contato);
     }
+
+    @Transactional
+    public void excluiContato(Long id) {
+        contatoRepository.deleteById(id);
+    }
 }
