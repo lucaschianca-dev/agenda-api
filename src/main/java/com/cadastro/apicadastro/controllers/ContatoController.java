@@ -1,7 +1,9 @@
 package com.cadastro.apicadastro.controllers;
 
 import com.cadastro.apicadastro.dtos.AtualizaContatoDTO;
+import com.cadastro.apicadastro.dtos.ListarContatoPorPessoaDTO;
 import com.cadastro.apicadastro.services.ContatoService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,16 +14,18 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class ContatoController {
 
-    private ContatoService contatoService;
+    private final ContatoService contatoService;
 
+    @Operation(summary = "Carregar dados de um contato pelo ID")
     @GetMapping("/{id}")
-    public ResponseEntity buscaContatoPorId(@PathVariable Long id) {
+    public ResponseEntity<ListarContatoPorPessoaDTO> buscaContatoPorId(@PathVariable Long id) {
         var contato = contatoService.buscaContatoPorId(id);
         return ResponseEntity.ok(contato);
     }
 
+    @Operation(summary = "Atualizar dados de um contato por ID")
     @PutMapping("/{id}")
-    public ResponseEntity atualizaContato(@PathVariable Long id, @RequestBody @Valid AtualizaContatoDTO atualiza) {
+    public ResponseEntity<AtualizaContatoDTO> atualizaContato(@PathVariable Long id, @RequestBody @Valid AtualizaContatoDTO atualiza) {
         AtualizaContatoDTO contatoDto = contatoService.atualizaContato(id, atualiza);
         if (contatoDto != null) {
             return ResponseEntity.ok(contatoDto);
@@ -30,8 +34,9 @@ public class ContatoController {
         }
     }
 
+    @Operation(summary = "Excluir um contato do banco de dados por ID")
     @DeleteMapping("/{id}")
-    public ResponseEntity excluiContato(@PathVariable Long id) {
+    public ResponseEntity<Void> excluiContato(@PathVariable Long id) {
         contatoService.excluiContato(id);
 
         return ResponseEntity.noContent().build();

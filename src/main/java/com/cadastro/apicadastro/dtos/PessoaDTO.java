@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 @Data
@@ -19,7 +20,7 @@ public class PessoaDTO {
 
     private String nome;
 
-    private LocalDate idade;
+    private LocalDate dataNascimento;
 
     private String cpf;
 
@@ -31,14 +32,14 @@ public class PessoaDTO {
 
     private Endereco endereco;
 
-    private List<Contato> contatos;
+    private List<Contato> contatos = Collections.emptyList();
 
     private boolean ativo;
 
     public PessoaDTO(Pessoa pessoa) {
         this.id = pessoa.getId();
         this.nome = pessoa.getNome();
-        this.idade = pessoa.getIdade();
+        this.dataNascimento = pessoa.getDataNascimento();
         this.cpf = pessoa.getCpf();
         this.genero = pessoa.getGenero();
         this.estadoCivil = pessoa.getEstadoCivil();

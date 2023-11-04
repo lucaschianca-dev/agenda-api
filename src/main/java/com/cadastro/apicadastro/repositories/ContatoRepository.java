@@ -13,4 +13,6 @@ import java.util.Optional;
 public interface ContatoRepository extends JpaRepository<Contato, Long> {
     @Query("select C FROM Contato AS C WHERE C.pessoa.id=:id")
     Optional<List<ListarContatoPorPessoaDTO>> buscarContatosPorId(Long id);
+
+    boolean existsById(Long id);
 }

@@ -15,7 +15,7 @@ public class Erro {
 
     private String error;
 
-    private String mensage;
+    private String message;
 
     private String path;
 }

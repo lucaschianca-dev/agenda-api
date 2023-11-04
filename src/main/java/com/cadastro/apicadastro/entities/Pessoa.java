@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -22,16 +23,24 @@ public class Pessoa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String nome;
 
-    private LocalDate idade;
+    @Column(nullable = false)
+    private LocalDate dataNascimento;
 
+    @Column(nullable = false, length = 11)
     private String cpf;
 
+    @Column(columnDefinition = "CHAR(1) NOT NULL CHECK (genero IN ('M', 'F'))")
     private String genero;
 
+    @Column(nullable = false)
+    @Length(max = 30)
     private String estadoCivil;
 
+    @Column(nullable = false)
+    @Length(max = 30)
     private String nacionalidade;
 
     private boolean ativo = true;

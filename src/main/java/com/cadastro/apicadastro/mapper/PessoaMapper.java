@@ -10,7 +10,7 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface PessoaMapper {
-    
+
     PessoaMapper INSTANCE = Mappers.getMapper(PessoaMapper.class);
 
 

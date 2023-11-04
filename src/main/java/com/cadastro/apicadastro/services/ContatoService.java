@@ -4,6 +4,7 @@ import com.cadastro.apicadastro.dtos.AtualizaContatoDTO;
 import com.cadastro.apicadastro.dtos.ContatoDTO;
 import com.cadastro.apicadastro.dtos.ListarContatoPorPessoaDTO;
 import com.cadastro.apicadastro.entities.Contato;
+import com.cadastro.apicadastro.erros.excecoesTratadas.NotFoundException;
 import com.cadastro.apicadastro.mapper.ContatoMapper;
 import com.cadastro.apicadastro.mapper.PessoaMapper;
 import com.cadastro.apicadastro.repositories.ContatoRepository;
@@ -17,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ContatoService {
 
-    private ContatoRepository contatoRepository;
+    private final ContatoRepository contatoRepository;
 
     @Transactional
     public ContatoDTO registraContato(Contato contato) {
@@ -26,26 +27,28 @@ public class ContatoService {
     }
 
     public List<ListarContatoPorPessoaDTO> buscaContatosPorPessoa(Long id) {
-        List<ListarContatoPorPessoaDTO> contatos = contatoRepository.buscarContatosPorId(id).orElse(null);
-        if (contatos != null) {
-            return contatos;
-        } else {
-            return null; // LEMBRAR DE LANÇAR EXCEÇÃO
+        List<ListarContatoPorPessoaDTO> contatos = contatoRepository.buscarContatosPorId(id).get();
+
+        if (contatos == null || contatos.isEmpty()) {
+
+            throw new NotFoundException("Pessoa não encontrada ou não contém nenhum contato!");
         }
+
+        return contatos;
     }
 
     public ListarContatoPorPessoaDTO buscaContatoPorId(Long id) {
-        Contato contato = contatoRepository.findById(id).orElse(null);
-        if (contato != null) {
-            return PessoaMapper.INSTANCE.toPessoaDTO(contato);
-        } else {
-            return null; // LEMBRAR DE LANÇAR EXCEÇÃO
-        }
+        Contato contato = contatoRepository
+                .findById(id).orElseThrow(() -> new NotFoundException("Contato não encontrado!"));
+
+        return PessoaMapper.INSTANCE.toPessoaDTO(contato);
     }
 
     @Transactional
     public AtualizaContatoDTO atualizaContato(Long id, AtualizaContatoDTO atualiza) {
-        Contato contato = contatoRepository.findById(id).orElseThrow();
+        Contato contato = contatoRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Contato não encontrado!"));
+
         contato.atualizaContato(atualiza);
 
         return ContatoMapper.INSTANCE.toAtualizaContatoDTO(contato);
@@ -53,6 +56,9 @@ public class ContatoService {
 
     @Transactional
     public void excluiContato(Long id) {
+        if (!contatoRepository.existsById(id)) {
+            throw new NotFoundException("Contato não encontrado!");
+        }
         contatoRepository.deleteById(id);
     }
 }
