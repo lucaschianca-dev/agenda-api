@@ -8,7 +8,6 @@ import com.cadastro.apicadastro.entities.Contato;
 import com.cadastro.apicadastro.requests.PessoaRegistroRequest;
 import com.cadastro.apicadastro.services.ContatoService;
 import com.cadastro.apicadastro.services.PessoaService;
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

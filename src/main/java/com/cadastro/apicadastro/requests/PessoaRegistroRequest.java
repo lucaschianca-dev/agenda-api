@@ -28,7 +28,7 @@ public class PessoaRegistroRequest {
     private String cpf;
 
     @NotBlank(message = "Gênero é obrigatório")
-    @Pattern(regexp = "^([M]{1}|[F]{1})$", message = "Gênero deve ser 'M' ou 'F'" )
+    @Pattern(regexp = "^([M]{1}|[F]{1})$", message = "Gênero deve ser 'M' ou 'F'")
     private String genero;
 
     @NotBlank(message = "Estado Civil é obrigatório")
