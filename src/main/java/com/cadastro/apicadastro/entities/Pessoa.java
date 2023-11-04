@@ -29,7 +29,7 @@ public class Pessoa {
     @Column(nullable = false)
     private LocalDate dataNascimento;
 
-    @Column(nullable = false, length = 11)
+    @Column(unique = true, nullable = false, length = 11)
     private String cpf;
 
     @Column(columnDefinition = "CHAR(1) NOT NULL CHECK (genero IN ('M', 'F'))")
