@@ -9,7 +9,7 @@ public record DataEndereco(
         @Pattern(regexp = ".{2}")
         String uf,
 
-        @NotBlank(message = "CPF é obrigatório")
+        @NotBlank(message = "CEP é obrigatório")
         @Pattern(regexp = "\\d{8}", message = "CEP deve ter 8 dígitos")
         String cep,
 
@@ -21,7 +21,7 @@ public record DataEndereco(
         @Pattern(regexp = ".{1,80}", message = "Máximo de caracteres é 80")
         String bairro,
 
-        @NotBlank(message = "Bairro é obrigatório")
+        @NotBlank(message = "Rua é obrigatório")
         @Pattern(regexp = ".{1,100}", message = "Máximo de caracteres é 100")
         String rua,
 
