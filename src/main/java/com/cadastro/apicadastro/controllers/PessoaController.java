@@ -4,7 +4,7 @@ import com.cadastro.apicadastro.dtos.AtualizaPessoaDTO;
 import com.cadastro.apicadastro.dtos.ListarContatoPorPessoaDTO;
 import com.cadastro.apicadastro.dtos.MalaDiretaDTO;
 import com.cadastro.apicadastro.dtos.PessoaDTO;
-import com.cadastro.apicadastro.entities.Contato;
+import com.cadastro.apicadastro.requests.ContatoRegistroRequest;
 import com.cadastro.apicadastro.requests.PessoaRegistroRequest;
 import com.cadastro.apicadastro.services.ContatoService;
 import com.cadastro.apicadastro.services.PessoaService;
@@ -69,8 +69,8 @@ public class PessoaController {
 
     @Operation(summary = "Adicionar um contato à uma pessoa(ID)")
     @PostMapping("/{pessoaId}/contatos")
-    public ResponseEntity<PessoaDTO> adicionaContato(@PathVariable Long pessoaId, @RequestBody Contato contato) {
-        return ResponseEntity.ok(pessoaService.adicionaContato(pessoaId, contato));
+    public ResponseEntity<PessoaDTO> adicionaContato(@PathVariable Long pessoaId, @RequestBody @Valid ContatoRegistroRequest request) {
+        return ResponseEntity.ok(pessoaService.adicionaContato(pessoaId, request));
     }
 
     @Operation(summary = "Ativar o registro de uma pessoa inativa por ID")

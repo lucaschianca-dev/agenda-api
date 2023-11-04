@@ -5,12 +5,11 @@ import com.cadastro.apicadastro.enums.TipoContato;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "contatos")
@@ -24,14 +23,16 @@ public class Contato {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @Column(nullable = false)
+    @Length(max = 30)
     private String nome;
 
-    @NotNull
+    @Column(nullable = false)
     @Enumerated(EnumType.ORDINAL)
     private TipoContato tipoContato;
 
-    @NotBlank
+    @Column(nullable = false)
+    @Length(max = 50)
     private String contato;
 
     @ManyToOne()

@@ -3,11 +3,12 @@ package com.cadastro.apicadastro.services;
 import com.cadastro.apicadastro.dtos.AtualizaPessoaDTO;
 import com.cadastro.apicadastro.dtos.MalaDiretaDTO;
 import com.cadastro.apicadastro.dtos.PessoaDTO;
-import com.cadastro.apicadastro.entities.Contato;
 import com.cadastro.apicadastro.entities.Pessoa;
 import com.cadastro.apicadastro.erros.excecoesTratadas.NotFoundException;
+import com.cadastro.apicadastro.mapper.ContatoMapper;
 import com.cadastro.apicadastro.mapper.PessoaMapper;
 import com.cadastro.apicadastro.repositories.PessoaRepository;
+import com.cadastro.apicadastro.requests.ContatoRegistroRequest;
 import com.cadastro.apicadastro.requests.PessoaRegistroRequest;
 import com.cadastro.apicadastro.util.extensions.EnderecoExtensions;
 import lombok.AllArgsConstructor;
@@ -61,18 +62,17 @@ public class PessoaService {
     }
 
     @Transactional
-    public PessoaDTO adicionaContato(Long pessoaId, Contato contato) {
-        Pessoa pessoa = pessoaRepository.findById(pessoaId).orElse(null);
+    public PessoaDTO adicionaContato(Long pessoaId, ContatoRegistroRequest request) {
+        Pessoa pessoa = pessoaRepository.findById(pessoaId).orElseThrow(() -> new NotFoundException("Pessoa não encontrada"));
 
-        if (pessoa != null) {
-            contato.setPessoa(pessoa);
-            contatoService.registraContato(contato);
-            pessoa.getContatos().add(contato);
-            pessoaRepository.save(pessoa);
-            return new PessoaDTO(pessoa);
-        } else {
-            throw new NotFoundException("Pessoa não encontrada");
-        }
+        var contato = ContatoMapper.INSTANCE.toContato(request);
+
+        contato.setPessoa(pessoa);
+        contatoService.registraContato(contato);
+        pessoa.getContatos().add(contato);
+        pessoaRepository.save(pessoa);
+
+        return new PessoaDTO(pessoa);
     }
 
     @Transactional
