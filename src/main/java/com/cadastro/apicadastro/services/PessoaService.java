@@ -10,7 +10,6 @@ import com.cadastro.apicadastro.mapper.PessoaMapper;
 import com.cadastro.apicadastro.repositories.PessoaRepository;
 import com.cadastro.apicadastro.requests.PessoaRegistroRequest;
 import com.cadastro.apicadastro.util.extensions.EnderecoExtensions;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -88,7 +87,8 @@ public class PessoaService {
 
     @Transactional
     public PessoaDTO inativaPessoa(Long id) {
-        Pessoa pessoa = pessoaRepository.getReferenceById(id);
+        Pessoa pessoa = pessoaRepository.findById(id).orElseThrow(() -> new NotFoundException("Pessoa não encontrada"));
+
         pessoa.inativaPessoa();
 
         return PessoaMapper.INSTANCE.toPessoaDTO(pessoa);
