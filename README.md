@@ -26,8 +26,8 @@ Pré-requisitos: Java 17
 ./mvnw.cmd spring-boot:run
 ```
 
-Documentação Swagger (OpenAPI)
-``http://localhost:8080/swagger-ui.html``
+## Documentação Swagger (OpenAPI)
+```http://localhost:8080/swagger-ui.html```
 
 # Autor
 
