@@ -5,6 +5,8 @@ import com.cadastro.apicadastro.enums.TipoContato;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -22,11 +24,14 @@ public class Contato {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     private String nome;
 
+    @NotNull
     @Enumerated(EnumType.ORDINAL)
     private TipoContato tipoContato;
 
+    @NotBlank
     private String contato;
 
     @ManyToOne()
